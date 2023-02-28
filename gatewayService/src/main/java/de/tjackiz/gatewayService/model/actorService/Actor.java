@@ -1,4 +1,4 @@
-package de.tjackiz.gatewayService.model.movieService;
+package de.tjackiz.gatewayService.model.actorService;
 
 import de.tjackiz.gatewayService.model.common.AbstractBase;
 

@@ -1,5 +1,6 @@
 package de.tjackiz.gatewayService.model.movieService;
 
+import de.tjackiz.gatewayService.model.actorService.Actor;
 import de.tjackiz.gatewayService.model.common.AbstractBase;
 
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public abstract class AbstractMovie extends AbstractBase {
-    
+
     private String name;
 
     private Date releaseDate;

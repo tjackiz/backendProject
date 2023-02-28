@@ -1,6 +1,6 @@
-package de.tjackiz.gatewayService.controller.movieService;
+package de.tjackiz.gatewayService.controller.actorService;
 
-import de.tjackiz.gatewayService.model.movieService.Actor;
+import de.tjackiz.gatewayService.model.actorService.Actor;
 import de.tjackiz.gatewayService.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
