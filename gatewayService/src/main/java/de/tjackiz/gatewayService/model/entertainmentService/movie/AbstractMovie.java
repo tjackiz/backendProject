@@ -1,7 +1,7 @@
-package de.tjackiz.gatewayService.model.movieService;
+package de.tjackiz.gatewayService.model.entertainmentService.movie;
 
-import de.tjackiz.gatewayService.model.actorService.Actor;
 import de.tjackiz.gatewayService.model.common.AbstractBase;
+import de.tjackiz.gatewayService.model.entertainmentService.actor.Actor;
 
 import java.util.Date;
 import java.util.Objects;

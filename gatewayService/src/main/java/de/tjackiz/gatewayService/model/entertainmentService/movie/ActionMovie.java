@@ -1,4 +1,4 @@
-package de.tjackiz.gatewayService.model.movieService;
+package de.tjackiz.gatewayService.model.entertainmentService.movie;
 
 import java.util.Objects;
 

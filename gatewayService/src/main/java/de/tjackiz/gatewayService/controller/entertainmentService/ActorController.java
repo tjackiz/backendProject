@@ -1,7 +1,7 @@
-package de.tjackiz.gatewayService.controller.actorService;
+package de.tjackiz.gatewayService.controller.entertainmentService;
 
-import de.tjackiz.gatewayService.model.actorService.Actor;
-import de.tjackiz.gatewayService.service.ActorService;
+import de.tjackiz.gatewayService.model.entertainmentService.actor.Actor;
+import de.tjackiz.gatewayService.service.entertainmentService.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
