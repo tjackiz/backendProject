@@ -1,2 +1,2 @@
 # backendProject
-Simple backend project using multiple frameworks around for playing around with them
+Simple backend project for playing around with multiple frameworks, docker, k8s and so on :)
