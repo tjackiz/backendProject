@@ -1,5 +1,6 @@
-package de.tjackiz.gatewayService.service.webClientService;
+package de.tjackiz.gatewayService.service.webClientService.impl;
 
+import de.tjackiz.gatewayService.service.webClientService.WebClientService;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
@@ -57,17 +58,31 @@ public class WebClientServiceImpl implements WebClientService {
     }
 
     @Override
-    public <T> Mono<T> post(String uri, T body, ParameterizedTypeReference<T> parameterizedTypeReference) {
-        return null;
+    public <T> Mono<T> post(String uri, Object body, ParameterizedTypeReference<T> parameterizedTypeReference) {
+        return webClient.post()
+                .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(parameterizedTypeReference);
     }
 
     @Override
-    public <T> Mono<T> put(String uri, T body, ParameterizedTypeReference<T> parameterizedTypeReference) {
-        return null;
+    public <T> Mono<T> put(String uri, Object body, ParameterizedTypeReference<T> parameterizedTypeReference) {
+        return webClient.put()
+                .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(parameterizedTypeReference);
     }
 
     @Override
     public <T> Mono<T> delete(String uri, UUID id, ParameterizedTypeReference<T> parameterizedTypeReference) {
-        return null;
+        return webClient.delete()
+                .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .retrieve()
+                .bodyToMono(parameterizedTypeReference);
     }
 }

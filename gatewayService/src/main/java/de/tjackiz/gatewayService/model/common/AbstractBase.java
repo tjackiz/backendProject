@@ -1,5 +1,7 @@
 package de.tjackiz.gatewayService.model.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -8,8 +10,10 @@ public abstract class AbstractBase {
 
     private UUID id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date createdDate;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date timestamp;
 
     private String createdUser;

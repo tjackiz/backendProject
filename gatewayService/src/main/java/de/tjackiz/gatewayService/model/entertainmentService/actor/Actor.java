@@ -1,19 +1,29 @@
 package de.tjackiz.gatewayService.model.entertainmentService.actor;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import de.tjackiz.gatewayService.model.common.AbstractBase;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class Actor extends AbstractBase {
 
+    @NotBlank
     private String forename;
 
+    @NotBlank
     private String surname;
 
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date birthdate;
 
-    // 0-10
+    @Min(0)
+    @Max(10)
     private int imdbRating;
 
     public String getForename() {

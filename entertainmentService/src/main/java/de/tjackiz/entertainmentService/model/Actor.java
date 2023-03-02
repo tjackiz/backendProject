@@ -1,5 +1,6 @@
 package de.tjackiz.entertainmentService.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import de.tjackiz.entertainmentService.model.common.AbstractBase;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ public class Actor extends AbstractBase {
 
     private String surname;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date birthdate;
 
     // 0-10

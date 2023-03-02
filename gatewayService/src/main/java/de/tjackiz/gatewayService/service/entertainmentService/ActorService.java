@@ -1,9 +1,17 @@
 package de.tjackiz.gatewayService.service.entertainmentService;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import de.tjackiz.gatewayService.model.entertainmentService.actor.Actor;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.validation.annotation.Validated;
 
-@Service
-@Slf4j
-public class ActorService {
+import java.util.UUID;
+
+@Validated
+public interface ActorService {
+    Actor getActorById(@NotNull UUID id);
+
+    UUID createActor(@Valid Actor actor);
+
+    Actor updateActor(@Valid UUID id, @Valid Actor actor);
 }
