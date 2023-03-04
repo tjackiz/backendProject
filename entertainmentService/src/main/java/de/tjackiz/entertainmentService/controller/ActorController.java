@@ -1,32 +1,35 @@
 package de.tjackiz.entertainmentService.controller;
 
 import de.tjackiz.entertainmentService.model.Actor;
+import de.tjackiz.entertainmentService.service.ActorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/actors")
 public class ActorController {
 
+    private final ActorService actorService;
+
+    @Autowired
+    public ActorController(ActorService actorService) {
+        this.actorService = actorService;
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Actor> getActorById(@PathVariable UUID id) {
-        Actor actor = new Actor();
-        actor.setBirthdate(new Date());
-        actor.setForename("harald");
-        actor.setSurname("haraldsen");
-        actor.setImdbRating(5);
-        actor.setId(id);
-        return ResponseEntity.ok(actor);
+        Actor actor = actorService.getActorById(id);
+        return actor == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(actor);
     }
 
     @PostMapping
     public ResponseEntity<UUID> createActor(@RequestBody Actor actor) {
-        System.out.println("\t### actor: " + actor.toString());
-        return new ResponseEntity<>(UUID.randomUUID(), HttpStatus.CREATED);
+        UUID id = actorService.createActor(actor);
+        return id == null ? ResponseEntity.noContent().build() : new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
