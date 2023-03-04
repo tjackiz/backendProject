@@ -1,19 +1,29 @@
 package de.tjackiz.entertainmentService.model.common;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
+@MappedSuperclass
 public abstract class AbstractBase {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     private Date createdDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @Temporal(TemporalType.DATE)
+    @UpdateTimestamp
     private Date timestamp;
 
     private String createdUser;
