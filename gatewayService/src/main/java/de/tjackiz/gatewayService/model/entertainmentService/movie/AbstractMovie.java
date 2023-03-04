@@ -2,6 +2,10 @@ package de.tjackiz.gatewayService.model.entertainmentService.movie;
 
 import de.tjackiz.gatewayService.model.common.AbstractBase;
 import de.tjackiz.gatewayService.model.entertainmentService.actor.Actor;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Past;
 
 import java.util.Date;
 import java.util.Objects;
@@ -9,11 +13,14 @@ import java.util.Set;
 
 public abstract class AbstractMovie extends AbstractBase {
 
+    @NotBlank
     private String name;
 
+    @Past
     private Date releaseDate;
 
-    private Set<Actor> actorSet;
+    @NotEmpty
+    private Set<@Valid Actor> actorSet;
 
     public String getName() {
         return name;

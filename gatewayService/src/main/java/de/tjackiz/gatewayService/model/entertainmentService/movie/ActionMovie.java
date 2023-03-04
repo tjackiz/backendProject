@@ -1,9 +1,12 @@
 package de.tjackiz.gatewayService.model.entertainmentService.movie;
 
+import jakarta.validation.constraints.Min;
+
 import java.util.Objects;
 
 public class ActionMovie extends AbstractMovie {
 
+    @Min(0)
     private int avgBodyCount;
 
     public int getAvgBodyCount() {
