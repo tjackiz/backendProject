@@ -9,6 +9,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -43,11 +44,26 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor updateActor(UUID id, Actor actor) {
-        // TODO how2 check for assigned uuid ?
         String uri = "http://localhost:8082/actors/" + id.toString();
         Mono<Actor> mono = webClientService.put(uri, actor, new ParameterizedTypeReference<Actor>() {
         });
 
         return mono.block();
+    }
+
+    // TODO replace with pagination
+    @Override
+    public List<Actor> getActorList() {
+        String uri = "http://localhost:8082/actors";
+        Mono<List<Actor>> mono = webClientService.get(uri, new ParameterizedTypeReference<List<Actor>>() {
+        });
+
+        return mono.block();
+    }
+
+    @Override
+    public void deleteActor(UUID id) {
+        String uri = "http://localhost:8082/actors/" + id.toString();
+        webClientService.delete(uri);
     }
 }
