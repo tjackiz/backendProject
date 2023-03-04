@@ -16,7 +16,6 @@ import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
 import java.time.Duration;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 
@@ -78,11 +77,19 @@ public class WebClientServiceImpl implements WebClientService {
     }
 
     @Override
-    public <T> Mono<T> delete(String uri, UUID id, ParameterizedTypeReference<T> parameterizedTypeReference) {
+    public <T> Mono<T> delete(String uri, ParameterizedTypeReference<T> parameterizedTypeReference) {
         return webClient.delete()
                 .uri(uri)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
                 .bodyToMono(parameterizedTypeReference);
+    }
+
+    @Override
+    public void delete(String uri) {
+        webClient.delete()
+                .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .retrieve();
     }
 }
