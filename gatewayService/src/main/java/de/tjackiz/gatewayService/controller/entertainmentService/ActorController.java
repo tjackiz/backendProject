@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,6 +20,12 @@ public class ActorController {
     @Autowired
     public ActorController(ActorService actorService) {
         this.actorService = actorService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Actor>> getActors() {
+        List<Actor> actorList = actorService.getActorList();
+        return actorList == null || actorList.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(actorList);
     }
 
     @GetMapping("/{id}")
@@ -38,5 +45,11 @@ public class ActorController {
     public ResponseEntity<Actor> updateActor(@Valid @PathVariable UUID id, @RequestBody Actor actor) {
         actor = actorService.updateActor(id, actor);
         return actor == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(actor);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteActor(@Valid @PathVariable UUID id) {
+        actorService.deleteActor(id);
+        return ResponseEntity.noContent().build();
     }
 }
