@@ -9,7 +9,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -25,7 +25,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public AbstractMovie getMovieById(UUID id) {
-        String uri = "http://localhost:8082/actors/" + id.toString();
+        String uri = "http://localhost:8082/movies/" + id.toString();
         Mono<AbstractMovie> mono = webClientService.get(uri, new ParameterizedTypeReference<AbstractMovie>() {
         });
 
@@ -34,7 +34,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public UUID createMovie(AbstractMovie movie) {
-        String uri = "http://localhost:8082/actors";
+        String uri = "http://localhost:8082/movies";
         Mono<UUID> mono = webClientService.post(uri, movie, new ParameterizedTypeReference<UUID>() {
         });
 
@@ -43,7 +43,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public AbstractMovie updateMovie(UUID id, AbstractMovie movie) {
-        String uri = "http://localhost:8082/actors/" + id.toString();
+        String uri = "http://localhost:8082/movies/" + id.toString();
         Mono<AbstractMovie> mono = webClientService.put(uri, movie, new ParameterizedTypeReference<AbstractMovie>() {
         });
 
@@ -52,9 +52,9 @@ public class MovieServiceImpl implements MovieService {
 
     // TODO replace with pagination
     @Override
-    public List<AbstractMovie> getMovieList() {
-        String uri = "http://localhost:8082/actors";
-        Mono<List<AbstractMovie>> mono = webClientService.get(uri, new ParameterizedTypeReference<List<AbstractMovie>>() {
+    public Set<AbstractMovie> getMovieSet() {
+        String uri = "http://localhost:8082/movies";
+        Mono<Set<AbstractMovie>> mono = webClientService.get(uri, new ParameterizedTypeReference<Set<AbstractMovie>>() {
         });
 
         return mono.block();
@@ -62,7 +62,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void deleteMovie(UUID id) {
-        String uri = "http://localhost:8082/actors/" + id.toString();
+        String uri = "http://localhost:8082/movies/" + id.toString();
         webClientService.delete(uri);
     }
 }
