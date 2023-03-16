@@ -4,7 +4,7 @@ import de.tjackiz.gatewayService.model.entertainmentService.movie.AbstractMovie;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Validated
@@ -16,7 +16,7 @@ public interface MovieService {
 
     AbstractMovie updateMovie(@Valid UUID id, @Valid AbstractMovie movie);
 
-    List<AbstractMovie> getMovieList();
+    Set<AbstractMovie> getMovieSet();
 
     void deleteMovie(@Valid UUID id);
 }
