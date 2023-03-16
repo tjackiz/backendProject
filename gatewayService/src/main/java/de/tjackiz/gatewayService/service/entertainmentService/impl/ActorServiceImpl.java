@@ -9,7 +9,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -53,9 +53,9 @@ public class ActorServiceImpl implements ActorService {
 
     // TODO replace with pagination
     @Override
-    public List<Actor> getActorList() {
+    public Set<Actor> getActorSet() {
         String uri = "http://localhost:8082/actors";
-        Mono<List<Actor>> mono = webClientService.get(uri, new ParameterizedTypeReference<List<Actor>>() {
+        Mono<Set<Actor>> mono = webClientService.get(uri, new ParameterizedTypeReference<Set<Actor>>() {
         });
 
         return mono.block();
