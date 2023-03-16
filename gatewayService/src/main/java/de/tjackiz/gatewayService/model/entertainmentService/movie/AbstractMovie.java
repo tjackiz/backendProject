@@ -1,5 +1,8 @@
 package de.tjackiz.gatewayService.model.entertainmentService.movie;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import de.tjackiz.gatewayService.model.common.AbstractBase;
 import de.tjackiz.gatewayService.model.entertainmentService.actor.Actor;
 import jakarta.validation.Valid;
@@ -11,12 +14,16 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+@JsonSubTypes({@JsonSubTypes.Type(value = ActionMovie.class, name = "action"),
+        @JsonSubTypes.Type(value = HorrorMovie.class, name = "horror")})
 public abstract class AbstractMovie extends AbstractBase {
 
     @NotBlank
     private String name;
 
     @Past
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date releaseDate;
 
     @NotEmpty
