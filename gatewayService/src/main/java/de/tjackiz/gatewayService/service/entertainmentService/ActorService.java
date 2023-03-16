@@ -4,7 +4,7 @@ import de.tjackiz.gatewayService.model.entertainmentService.actor.Actor;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Validated
@@ -15,7 +15,7 @@ public interface ActorService {
 
     Actor updateActor(@Valid UUID id, @Valid Actor actor);
 
-    List<Actor> getActorList();
+    Set<Actor> getActorSet();
 
     void deleteActor(@Valid UUID id);
 }
