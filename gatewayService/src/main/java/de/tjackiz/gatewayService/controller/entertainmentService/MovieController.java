@@ -2,13 +2,12 @@ package de.tjackiz.gatewayService.controller.entertainmentService;
 
 import de.tjackiz.gatewayService.model.entertainmentService.movie.AbstractMovie;
 import de.tjackiz.gatewayService.service.entertainmentService.MovieService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -23,9 +22,9 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AbstractMovie>> getMovies() {
-        List<AbstractMovie> movieList = movieService.getMovieList();
-        return movieList == null || movieList.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(movieList);
+    public ResponseEntity<Set<AbstractMovie>> getMovies() {
+        Set<AbstractMovie> movieSet = movieService.getMovieSet();
+        return movieSet == null || movieSet.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(movieSet);
     }
 
     @GetMapping("/{id}")
@@ -42,13 +41,13 @@ public class MovieController {
 
     // TODO what return type should be used here ?
     @PutMapping("/{id}")
-    public ResponseEntity<AbstractMovie> updateMovie(@Valid @PathVariable UUID id, @RequestBody AbstractMovie movie) {
+    public ResponseEntity<AbstractMovie> updateMovie(@PathVariable UUID id, @RequestBody AbstractMovie movie) {
         movie = movieService.updateMovie(id, movie);
         return movie == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(movie);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteMovie(@Valid @PathVariable UUID id) {
+    public ResponseEntity deleteMovie(@PathVariable UUID id) {
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
     }
