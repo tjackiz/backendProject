@@ -2,14 +2,13 @@ package de.tjackiz.gatewayService.controller.entertainmentService;
 
 import de.tjackiz.gatewayService.model.entertainmentService.actor.Actor;
 import de.tjackiz.gatewayService.service.entertainmentService.ActorService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -26,9 +25,9 @@ public class ActorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Actor>> getActors() {
-        List<Actor> actorList = actorService.getActorList();
-        return actorList == null || actorList.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(actorList);
+    public ResponseEntity<Set<Actor>> getActors() {
+        Set<Actor> actorSet = actorService.getActorSet();
+        return actorSet == null || actorSet.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(actorSet);
     }
 
     @GetMapping("/{id}")
@@ -57,13 +56,13 @@ public class ActorController {
 
     // TODO what return type should be used here ?
     @PutMapping("/{id}")
-    public ResponseEntity<Actor> updateActor(@Valid @PathVariable UUID id, @RequestBody Actor actor) {
+    public ResponseEntity<Actor> updateActor(@PathVariable UUID id, @RequestBody Actor actor) {
         actor = actorService.updateActor(id, actor);
         return actor == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(actor);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteActor(@Valid @PathVariable UUID id) {
+    public ResponseEntity deleteActor(@PathVariable UUID id) {
         actorService.deleteActor(id);
         return ResponseEntity.noContent().build();
     }
