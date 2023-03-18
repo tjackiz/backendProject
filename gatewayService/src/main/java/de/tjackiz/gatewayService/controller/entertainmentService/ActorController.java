@@ -14,7 +14,7 @@ import java.util.UUID;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
-@RequestMapping("/actors")
+@RequestMapping("/v1/actors")
 public class ActorController {
 
     private final ActorService actorService;
