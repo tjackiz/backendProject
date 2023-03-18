@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/actors")
+@RequestMapping("/v1/actors")
 public class ActorController {
 
     private final ActorService actorService;
