@@ -1,11 +1,20 @@
 spring:
   datasource:
+    #url: jdbc:mysql://localhost:30306/testDb?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
     url: jdbc:h2:mem:mydb
+    #username: root
     username: sa
+    #password: userUser23
     password: password
     driverClassName: org.h2.Driver
+    #driver-class-name: com.mysql.jdbc.Driver
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
+    #database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      #dialect: org.hibernate.dialect.MySQL8Dialect
   h2:
     console:
       enabled: true
