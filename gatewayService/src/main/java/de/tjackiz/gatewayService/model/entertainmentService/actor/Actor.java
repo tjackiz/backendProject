@@ -2,10 +2,7 @@ package de.tjackiz.gatewayService.model.entertainmentService.actor;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import de.tjackiz.gatewayService.model.common.AbstractBase;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -20,6 +17,7 @@ public class Actor extends AbstractBase {
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @Past
     private Date birthdate;
 
     @Min(0)
