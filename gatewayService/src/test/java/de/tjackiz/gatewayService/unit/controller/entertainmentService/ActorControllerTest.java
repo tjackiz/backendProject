@@ -13,24 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.*;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.http.HttpStatus.CREATED;
 
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(controllers = ActorController.class)
@@ -43,9 +37,11 @@ public class ActorControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    // TODO remove adjust appcontext
     @MockBean
     private ActorService actorService;
 
+    // TODO remove adjust appcontext
     @MockBean
     private WebClientService webClientService;
 
@@ -141,55 +137,6 @@ public class ActorControllerTest {
                 .andExpect(MockMvcResultMatchers.header().string("Location", expectedLocation + uuid))
                 .andDo(MockMvcResultHandlers.print());
     }
-
-    @PostMapping
-    public ResponseEntity<UUID> createActor(@RequestBody Actor actor) {
-        UUID id = actorService.createActor(actor);
-
-        // TODO rework if writing requests are async, no distinguish needed anymore
-        // add location header
-        if (id != null) {
-            String location = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(id)
-                    .toUriString();
-            return ResponseEntity.status(CREATED).header(HttpHeaders.LOCATION, location).body(id);
-        }
-
-        return ResponseEntity.noContent().build();
-    }
-//
-//    @PostMapping
-//    public ResponseEntity<UUID> createActor(@RequestBody Actor actor) {
-//        UUID id = actorService.createActor(actor);
-//
-//        // TODO rework if writing requests are async, no distinguish needed anymore
-//        // add location header
-//        if (id != null) {
-//            String location = ServletUriComponentsBuilder
-//                    .fromCurrentRequest()
-//                    .path("/{id}")
-//                    .buildAndExpand(id)
-//                    .toUriString();
-//            return ResponseEntity.status(CREATED).header(HttpHeaders.LOCATION, location).body(id);
-//        }
-//
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    // TODO what return type should be used here ?
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Actor> updateActor(@PathVariable UUID id, @RequestBody Actor actor) {
-//        actor = actorService.updateActor(id, actor);
-//        return actor == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(actor);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity deleteActor(@PathVariable UUID id) {
-//        actorService.deleteActor(id);
-//        return ResponseEntity.noContent().build();
-//    }
 
     /*** Utility ***/
     private Actor createActor(String forename, String surname, int imdbRating, Date birthdate) {
